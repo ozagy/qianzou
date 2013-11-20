@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Qianzou</title>
+  <%= stylesheet_link_tag    "style", :media => "all" %>
+  <%= stylesheet_link_tag "jquery-ui" %>
+  <%= stylesheet_link_tag "bootstrap" %>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"%>
+  <%= csrf_meta_tags %>
+  <%= yield :css %>
+</head>
+<body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+  <div id='header'>
+  	<div class='h-wrap'>
+  	  <%= image_tag("title.png",:id => "title", :class => "trans", :alt => "Qian Zou") %>
+  	  <div id='nav-div'>
+  	  	<div class='nav trans' id='nav-home'></div>
+  	  	<div class='nav trans' id='nav-about'></div>
+  	  	<div class='nav trans' id='nav-gallery'></div>
+  	  	<div class='nav trans' id='nav-contacts'></div>
+  	  </div>
+  	</div>
+  </div>
+  <div id='main'>
+  	<div class='h-wrap'>
+      <%= yield %>
+    </div>
+  </div>
+  <div id='footer'>
+    <div class='h-wrap'>
+    	
+    </div>	
+  </div>
+  <div id='admin'>
+  	<% if session[:admin] %>
+  	  Hi, <%= session[:admin] %>!<br>
+  	  <%= link_to 'Admin', admin_path%> | <%= link_to 'Log out', logout_path%>
+  	<% else %>
+  	  <%= link_to 'Admin', admin_path%>
+  	 <% end %>
+  </div>
+  <%= yield :fullscreen %>
+  <%= javascript_include_tag "http://code.jquery.com/ui/1.10.3/jquery-ui.js"%>
+  <%= javascript_include_tag "bootstrap.file-input.js" %>
+  <%= javascript_include_tag "main" %>
+</body>
+</html>

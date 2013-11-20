@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h2>
+  Album: <%= @album.name %>
+</h2>
+
+<p>
+  <strong>Description:</strong>
+  <%= @album.description %>
+</p>
+
+<p>
+  <strong>Photos:</strong> (<%= @album.photos.size %> in total)
+  <table class='manage-table photo-index'>
+  	<tr>
+      <th>Photo</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Album</th>
+      <th>Show Info</th>
+      <th>Edit Info</th>
+      <th>Delete</th>
+    </tr>
+    <% @album.photos.each do |photo| %>
+      <tr>
+      	<td><%= image_tag photo.image.url(:thumb) %></td>
+        <td><%= photo.name %></td>
+        <td><%= photo.description %></td>
+        <td><%= photo.album.name %></td>
+        <td><%= link_to 'Show Info', photo, :class => 'btn' %></td>
+        <td><%= link_to 'Edit Info', edit_photo_path(photo), :class => 'btn' %></td>
+        <td><%= link_to 'Delete', delete_album_photo_path(:id => photo.id, :photo_id => photo.id, :album_id => photo.album_id), data: { confirm: 'Are you sure?' }, :class => 'btn' %></td>
+      </tr>
+    <% end %>
+  </table>
+</p>
+
+<%= link_to '+ New Photo', new_album_photo_path(@album.id), :class => 'btn' %> 
+<%= link_to 'Back', albums_path, :class => 'btn' %>

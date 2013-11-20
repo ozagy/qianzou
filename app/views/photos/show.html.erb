@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @photo.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @photo.description %>
+</p>
+
+<p>
+  <strong>Album:</strong>
+  <%= @photo.album.name %>
+</p>
+<p>
+<%= image_tag @photo.image.url(:medium) %>
+</p>
+
+<%= link_to 'Upload More', new_album_photo_path(@photo.album.id), :class => 'btn' %> 
+<%= link_to 'Edit', edit_photo_path(@photo), :class => 'btn' %> 
+<%= link_to 'Back', album_path(@photo.album.id), :class => 'btn' %>
