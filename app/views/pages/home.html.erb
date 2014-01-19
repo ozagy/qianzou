@@ -12,7 +12,7 @@
       position:absolute;
       left:50%;
       margin-left:-65px;
-      margin-top:16px;
+      margin-top:6px;
       list-style: none;
       opacity:0.4;
     }
@@ -61,18 +61,36 @@
     .container {
       margin: 0 auto;
       width:100%;
-      border: 4px solid #fff;
       position:relative;
+	}
+	.image-wrap{
+	  width: 940px;
+	  height: 633px;
+	  text-align:center;
+	}
+	.image-wrap img{
+	  height: 626px;
+	  margin-top: 2px;
+	  display: inline;
+	  border: 4px solid #fff;
+	  -moz-box-shadow:1px 2px 8px #aaa;
+	  -webkit-box-shadow:1px 2px 8px #aaa;
+	  box-shadow:1px 2px 8px #aaa;
 	}
   </style>
 <% end %>
 
-<div class="container shadow">
+<div class="container">
   <div id="slides">
-    <%= image_tag("img/example-slide-1.jpg", :alt => "Photo by: Missy S Link: http://www.flickr.com/photos/listenmissy/5087404401/") %>
-    <%= image_tag("img/example-slide-2.jpg", :alt => "Photo by: Daniel Parks Link: http://www.flickr.com/photos/parksdh/5227623068/") %>
-    <%= image_tag("img/example-slide-3.jpg", :alt => "Photo by: Mike Ranweiler Link: http://www.flickr.com/photos/27874907@N04/4833059991/") %>
-    <%= image_tag("img/example-slide-4.jpg", :alt => "Photo by: Stuart SeegerLink: http://www.flickr.com/photos/stuseeger/97577796/") %>
+  	<div class="image-wrap"><%= image_tag("img/slide-1.jpg", :alt => "Photo by Qian Zou - Slide 1") %></div>
+    <div class="image-wrap"><%= image_tag("img/slide-2.jpg", :alt => "Photo by Qian Zou - Slide 2") %></div>
+    <div class="image-wrap"><%= image_tag("img/slide-8.jpg", :alt => "Photo by Qian Zou - Slide 8") %></div>
+    <div class="image-wrap"><%= image_tag("img/slide-6.jpg", :alt => "Photo by Qian Zou - Slide 6") %></div>
+    <div class="image-wrap"><%= image_tag("img/slide-10.jpg", :alt => "Photo by Qian Zou - Slide 10") %></div>
+    <div class="image-wrap"><%= image_tag("img/slide-3.jpg", :alt => "Photo by Qian Zou - Slide 3") %></div>
+    <div class="image-wrap"><%= image_tag("img/slide-4.jpg", :alt => "Photo by Qian Zou - Slide 4") %></div>
+    <div class="image-wrap"><%= image_tag("img/slide-5.jpg", :alt => "Photo by Qian Zou - Slide 5") %></div>
+    <div class="image-wrap"><%= image_tag("img/slide-9.jpg", :alt => "Photo by Qian Zou - Slide 9") %></div>
   </div>
 </div>
 <%= javascript_include_tag "jquery.slides.min.js" %>
@@ -80,7 +98,7 @@
 $(function(){
 	 $('#slides').slidesjs({
         width: 940,
-        height: 528,
+        height: 633,
         play: {
           active: true,
           auto: true,
