@@ -17,7 +17,7 @@
       	<td><%= image_tag photo.image.url(:thumb) %></td>
         <td><%= photo.name %></td>
         <td><%= photo.description %></td>
-        <td><%= photo.album.name %></td>
+        <td><%= photo.album.name if photo.album %></td>
         <td><%= link_to 'Show Info', photo, :class => 'btn' %></td>
         <td><%= link_to 'Edit Info', edit_photo_path(photo), :class => 'btn' %></td>
         <td><%= link_to 'Delete', photo, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn' %></td>

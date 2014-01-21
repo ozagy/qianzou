@@ -55,6 +55,9 @@ class AlbumsController < ApplicationController
   # DELETE /albums/1
   # DELETE /albums/1.json
   def destroy
+    @album.photos.each do |p|
+      p.destroy
+    end
     @album.destroy
     respond_to do |format|
       format.html { redirect_to albums_url }
