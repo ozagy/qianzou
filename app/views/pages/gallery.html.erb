@@ -178,7 +178,7 @@
 </div>
 <div id="container" class="photos clearfix">
   <% @photos.each do |p| %>
-	<div id='photo-<%= p.id %>' class="photo album-<%= p.album_id %> <%= 'clicked' if @p_init == p.name %> shadow trans" album='.album-<%= p.album_id %>' p_url='<%=p.image.url%>' p_name='<%=p.name%>'>
+	<div id='photo-<%= p.id %>' class="photo album-<%= p.album_id %> <%= 'clicked' if @p_init == p.name %> shadow trans" album='.album-<%= p.album_id %>' p_url='<%=p.image.url(:large)%>' p_name='<%=p.name%>'>
 	  <%= image_tag p.image.url(:medium), :class=>'image'%>
 	  <div class='p-name-div trans'>
 	  	<b class='p-name'><%= p.name %></b>
