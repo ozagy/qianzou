@@ -234,7 +234,6 @@
       });
       
       History.Adapter.bind(window, 'statechange', function() {
-	      console.log(History.getState());
 	      updateContent(History.getState());
 	  });
 	  
@@ -284,8 +283,8 @@ function resize(){
 	var imageH, imageW;
 	var assignH, assignW
 	
-	imageW = img.attr('p_width').to_i;
-	imageH = img.attr('p_height').to_i;
+	imageW = parseInt(img.attr('p_width'));
+	imageH = parseInt(img.attr('p_height'));
 	if ( imageW == undefined || imageH == undefined ){
 		var i = $("<img/>") // Make in memory copy of image to avoid css issues
 	    .attr("src", img.attr("src"))
@@ -303,7 +302,6 @@ function resize(){
 		    {
 		    	assignH = outerH;
 		    	assignW = assignH * (imageW/imageH);
-		    	
 		    }
 		    $('#full-image').css('width', assignW+'px');
 		    $('#full-container').css('width', assignW+rightW+'px');
@@ -385,7 +383,6 @@ function pushPhotoChangeState($ele){
 
 function updateContent(state)
 {
-	console.log('state.data');
 	if (state.data.album)
 	{
 		filterClicked($('#'+state.data.album)[0]);
