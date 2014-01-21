@@ -178,7 +178,7 @@
 </div>
 <div id="container" class="photos clearfix">
   <% @photos.each do |p| %>
-	<div id='photo-<%= p.id %>' class="photo album-<%= p.album_id %> <%= 'clicked' if @p_init == p.name %> shadow trans" album='.album-<%= p.album_id %>' p_url='<%=p.image.url(:large)%>' p_name='<%=p.name%>'>
+	<div id='photo-<%= p.id %>' class="photo album-<%= p.album_id %> <%= 'clicked' if @p_init == p.name %> shadow trans" album='.album-<%= p.album_id %>' p_url='<%=p.image.url(:large)%>' p_width='<%= p.dimensions[0] if p.dimensions %>' p_height='<%= p.dimensions[1] if p.dimensions %>' p_name='<%=p.name%>'>
 	  <%= image_tag p.image.url(:medium), :class=>'image'%>
 	  <div class='p-name-div trans'>
 	  	<b class='p-name'><%= p.name %></b>
@@ -283,35 +283,64 @@ function resize(){
     var img = $('#full-image'); 
 	var imageH, imageW;
 	var assignH, assignW
-	$("<img/>") // Make in memory copy of image to avoid css issues
-    .attr("src", img.attr("src"))
-    .load(function() {
-        imageW = this.width;   // Note: $(this).width() will not
-        imageH = this.height; // work for in memory images.
-        assignW = imageW;
-        assignH = imageH;
-        if ((imageW + rightW) > outerW)
-        {
-        	assignW = outerW - rightW;
-        	assignH = assignW * (imageH/imageW);
-        }
-        if (assignH > outerH)
-        {
-        	assignH = outerH;
-        	assignW = assignH * (imageW/imageH);
-        	
-        }
-        $('#full-image').css('width', assignW+'px');
-        $('#full-container').css('width', assignW+rightW+'px');
-        $('#full-container').css('height', assignH+'px');
-        $('#full-container').css('margin-top', (outerH-assignH+40)/2+'px');
-        $('#wrapper-left').css('width', assignW+'px');
-        $('#wrapper-left').css('height', assignH+'px');
-        $('#wrapper-right').css('height', assignH-30+'px');
-        $('.fb-comments-div').css('height', assignH-100+'px');
-        $('.p-arrow').css('top', (assignH - 40)/2 + 'px');
-    });
+	
+	imageW = img.attr('p_width').to_i;
+	imageH = img.attr('p_height').to_i;
+	if ( imageW == undefined || imageH == undefined ){
+		var i = $("<img/>") // Make in memory copy of image to avoid css issues
+	    .attr("src", img.attr("src"))
+	    .load(function(){
+	        imageW = i[0].width;   // Note: $(this).width() will not
+	        imageH = i[0].height; // work for in memory images.
+	        assignW = imageW;
+		    assignH = imageH;
+		    if ((imageW + rightW) > outerW)
+		    {
+		    	assignW = outerW - rightW;
+		    	assignH = assignW * (imageH/imageW);
+		    }
+		    if (assignH > outerH)
+		    {
+		    	assignH = outerH;
+		    	assignW = assignH * (imageW/imageH);
+		    	
+		    }
+		    $('#full-image').css('width', assignW+'px');
+		    $('#full-container').css('width', assignW+rightW+'px');
+		    $('#full-container').css('height', assignH+'px');
+		    $('#full-container').css('margin-top', (outerH-assignH+40)/2+'px');
+		    $('#wrapper-left').css('width', assignW+'px');
+		    $('#wrapper-left').css('height', assignH+'px');
+		    $('#wrapper-right').css('height', assignH-30+'px');
+		    $('.fb-comments-div').css('height', assignH-100+'px');
+		    $('.p-arrow').css('top', (assignH - 40)/2 + 'px');
+	    });
+    }else{
+    	assignW = imageW;
+	    assignH = imageH;
+	    if ((imageW + rightW) > outerW)
+	    {
+	    	assignW = outerW - rightW;
+	    	assignH = assignW * (imageH/imageW);
+	    }
+	    if (assignH > outerH)
+	    {
+	    	assignH = outerH;
+	    	assignW = assignH * (imageW/imageH);
+	    	
+	    }
+	    $('#full-image').css('width', assignW+'px');
+	    $('#full-container').css('width', assignW+rightW+'px');
+	    $('#full-container').css('height', assignH+'px');
+	    $('#full-container').css('margin-top', (outerH-assignH+40)/2+'px');
+	    $('#wrapper-left').css('width', assignW+'px');
+	    $('#wrapper-left').css('height', assignH+'px');
+	    $('#wrapper-right').css('height', assignH-30+'px');
+	    $('.fb-comments-div').css('height', assignH-100+'px');
+	    $('.p-arrow').css('top', (assignH - 40)/2 + 'px');
+    }
     
+
 }
 
 function updateCurrentArray( obj )
@@ -329,15 +358,17 @@ function changePhoto($ele)
 {
 	$('.photo').removeClass('clicked');
 	$ele.addClass('clicked');
-	$('#wrapper-left').html('<img src="'+$ele.attr('p_url')+'" id="full-image" /> \
+	$('#wrapper-left').html('<img src="'+$ele.attr('p_url')+'" id="full-image" p_width="'+ $ele.attr('p_width') +'" p_height="'+ $ele.attr('p_height') +'"/> \
 							<div id="a-info" class="trans"><strong>' + $ele.attr('p_name') + ' - ' + currentAlbumName +'</strong> \
 							<span> (' + (currentIndex + 1) + '/'+ currentArray.length +')</span></div> \
 							<div id="p-left-div" class="p-arrow-div" onclick="showLeft()"><div class="p-arrow" id="p-left"></div></div> \
 							<div id="p-right-div" class="p-arrow-div" onclick="showRight()"><div class="p-arrow" id="p-right""></div></div>');
 	url = window.location.href;
 	$('.fb-like').attr('data-href', url );
-	if (FB) FB.XFBML.parse();
+	if (typeof(FB) != 'undefined' && FB != null) 
+		FB.XFBML.parse();
 }
+
 function pushAlbumChangeState(){
 	if (currentAlbum == '*')
   		History.pushState({album:$('.selected').attr('id'), photo:$('.clicked').attr('id')}, $("title").text(), '/gallery');
