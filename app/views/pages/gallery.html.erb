@@ -330,7 +330,7 @@ function changePhoto($ele)
 	$('.photo').removeClass('clicked');
 	$ele.addClass('clicked');
 	$('#wrapper-left').html('<img src="'+$ele.attr('p_url')+'" id="full-image" /> \
-							<div id="a-info" class="trans"><strong>'+ currentAlbumName +'</strong> \
+							<div id="a-info" class="trans"><strong>' + $ele.attr('p_name') + ' - ' + currentAlbumName +'</strong> \
 							<span> (' + (currentIndex + 1) + '/'+ currentArray.length +')</span></div> \
 							<div id="p-left-div" class="p-arrow-div" onclick="showLeft()"><div class="p-arrow" id="p-left"></div></div> \
 							<div id="p-right-div" class="p-arrow-div" onclick="showRight()"><div class="p-arrow" id="p-right""></div></div>');

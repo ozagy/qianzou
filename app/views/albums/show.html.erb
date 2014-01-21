@@ -29,7 +29,7 @@
         <td><%= photo.album.name %></td>
         <td><%= link_to 'Show Info', photo, :class => 'btn' %></td>
         <td><%= link_to 'Edit Info', edit_photo_path(photo), :class => 'btn' %></td>
-        <td><%= link_to 'Delete', delete_album_photo_path(:id => photo.id, :photo_id => photo.id, :album_id => photo.album_id), data: { confirm: 'Are you sure?' }, :class => 'btn' %></td>
+        <td><%= link_to 'Delete', photo, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn' %></td>
       </tr>
     <% end %>
   </table>

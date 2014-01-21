@@ -11,7 +11,7 @@ Qianzou::Application.routes.draw do
   resources :photos
 
   get 'photos/new/:album_id', to: 'photos#new', as: 'new_album_photo'
-  get 'photos/:id/:album_id', to: 'photos#destroy', as: 'delete_album_photo'
+  delete 'photos/:id/:album_id', to: 'photos#destroy_album_photo', as: 'delete_album_photo'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

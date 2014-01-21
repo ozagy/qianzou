@@ -1,5 +1,5 @@
 class PhotosController < ApplicationController
-  before_action :set_photo, only: [:show, :edit, :update, :destroy]
+  before_action :set_photo, only: [:show, :edit, :update, :destroy, :destroy_album_photo]
   before_filter :require_admin
 
   # GET /photos
@@ -61,11 +61,7 @@ class PhotosController < ApplicationController
     @photo.destroy
     respond_to do |format|
       format.html { 
-        if params[:album_id] 
-          redirect_to album_path(params[:album_id])
-        else 
-          redirect_to photos_path 
-        end
+        redirect_to :back
       }
       format.json { head :no_content }
     end
