@@ -70,7 +70,6 @@
     	z-index:0;
     }
     #full-container{
-    	min-width:960px;
     	min-height:500px;
     	margin:20px auto 20px;
     	z-index:1;
@@ -149,9 +148,12 @@
     #a-info strong{
     	margin-left:10px;
     }
-    .fb-like{
-    	margin-top:15px;
+    .fb-like-div{
+    	position:absolute;
+    	right: -60px;
+    	bottom: 0px;
     }
+
     .fb-comments-div{
     	width:330px;
     	overflow-y:scroll;
@@ -185,6 +187,9 @@
 <%= javascript_include_tag "jquery.isotope.min.js" %>
 <%= javascript_include_tag "jquery.history.js" %>
 <script>
+
+
+
   $(function(){
 	  currentArray = []; 
 	  currentIndex = undefined;
@@ -271,7 +276,7 @@ function resize(){
   	var outerW = $('#fullscreen').width() - 40;
   	$('#full-container').height(outerH + 'px');
   	$('#full-container').width(outerW + 'px');
-  	var rightW = 370;
+  	var rightW = 0;
     var img = $('#full-image'); 
 	var imageH, imageW;
 	var assignH, assignW
@@ -281,6 +286,7 @@ function resize(){
         imageW = this.width;   // Note: $(this).width() will not
         imageH = this.height; // work for in memory images.
         assignW = imageW;
+        assignH = imageH;
         if ((imageW + rightW) > outerW)
         {
         	assignW = outerW - rightW;
@@ -290,6 +296,7 @@ function resize(){
         {
         	assignH = outerH;
         	assignW = assignH * (imageW/imageH);
+        	
         }
         $('#full-image').css('width', assignW+'px');
         $('#full-container').css('width', assignW+rightW+'px');
@@ -297,7 +304,7 @@ function resize(){
         $('#full-container').css('margin-top', (outerH-assignH+40)/2+'px');
         $('#wrapper-left').css('width', assignW+'px');
         $('#wrapper-left').css('height', assignH+'px');
-        $('#wrapper-right').css('height', assignH-20+'px');
+        $('#wrapper-right').css('height', assignH-30+'px');
         $('.fb-comments-div').css('height', assignH-100+'px');
         $('.p-arrow').css('top', (assignH - 40)/2 + 'px');
     });
@@ -324,6 +331,9 @@ function changePhoto($ele)
 							<span> (' + (currentIndex + 1) + '/'+ currentArray.length +')</span></div> \
 							<div id="p-left-div" class="p-arrow-div" onclick="showLeft()"><div class="p-arrow" id="p-left"></div></div> \
 							<div id="p-right-div" class="p-arrow-div" onclick="showRight()"><div class="p-arrow" id="p-right""></div></div>');
+	url = window.location.href;
+	$('.fb-like').attr('data-href', url );
+	if (FB) FB.XFBML.parse();
 }
 function pushAlbumChangeState(){
 	if (currentAlbum == '*')
@@ -382,15 +392,11 @@ function showRight(){
 	<div id='full-container'>
 		<div id='wrapper-left'>
 		</div>
-		<div id='wrapper-right'>
-			<strong id='p-title'>Abanese</strong>
-			
-			<div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-width="330" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
-			<div class='fb-comments-div'>
-				<div class="fb-comments" data-href="http://facebook.com" data-numposts="6" data-width="330"></div>
-			</div>
+		<div class='fb-like-div'>
+			<div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="box_count" data-action="like" data-show-faces="true" data-share="true"></div>
 		</div>
 		<%= image_tag 'close_button.png', :id=>'full-close' %>
 	</div>
+	
 </div>
 <% end %>
