@@ -1,9 +1,10 @@
 html{
 	background: url(./html-back.png) repeat;
+	height:100%;
 }
 body{
 	margin: 0;
-	height:100%;
+	min-height: 100%;
 	background: url(./subtle-pattern-7.jpg) repeat;
 	position:relative;
 }
@@ -28,13 +29,12 @@ p{
 	background-position: 0 -40px;
 	height:100px;
 }
-
 .h-wrap{
 	width:960px;
 	margin:0px auto;
 }
 #main{
-	margin-bottom:70px;
+	padding-bottom:70px;
 }
 #footer{
 	width:100%;
