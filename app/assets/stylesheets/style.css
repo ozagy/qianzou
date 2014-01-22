@@ -1,9 +1,20 @@
+html{
+	background: url(./html-back.png) repeat;
+}
 body{
 	margin: 0;
+	height:100%;
 	background: url(./subtle-pattern-7.jpg) repeat;
+	position:relative;
 }
 h2{
 	font-size:25px;
+}
+p{
+	font-family:"Century Gothic";
+}
+.footer-text{
+	padding:25px 0 0 5px;
 }
 #wrapper-right{
 	background:url(./subtle-pattern-7.jpg);
@@ -21,6 +32,17 @@ h2{
 .h-wrap{
 	width:960px;
 	margin:0px auto;
+}
+#main{
+	margin-bottom:70px;
+}
+#footer{
+	width:100%;
+	background: url(./footer-back.png) repeat-x;
+	height:50px;
+	opacity:0.6;
+	position:absolute;
+	bottom:0;
 }
 
 #title{

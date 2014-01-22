@@ -1,1 +1,73 @@
-<p>ABOUT</p>
+<% content_for :css do %>
+<style>
+html{
+	height:100%;
+}
+body{
+	height:100%;
+	background: url(./assets/about-br.jpg) no-repeat;
+	background-size: auto 100%;
+    background-repeat: repeat-x;
+    background-attachment: fixed;
+    position:relative;
+}
+#footer{
+	position:absolute;
+	bottom:0;
+}
+.about-div{
+	position: absolute;
+	left:50%;
+	bottom:120px;
+	width:500px;
+	margin-left:0px;
+}
+h4, h5, p{
+	font-family: "Century Gothic";
+	color:#42392e;
+	opacity:0.9;
+}
+h4{
+	padding-top:10px;
+}
+p{
+	font-size:14px;
+}
+.contact-icon{
+	margin-top:-2px;
+	opacity:0.9;
+	width:20px;
+}
+.contact-link{
+	color:#42392e;
+	opacity:0.7;
+}
+</style>
+<% end %>
+
+<div class='about-div'>
+
+	<h4>Qian Zou</h4>
+	<p>
+		Interested in photography, Qian Zou focuses on the moments that touches her in daily life. This is a platform that presents her works.
+	</p>
+	
+	<h5><i>Education Background</i></h5>
+	<p>
+		2008-2012 BA Harbin Institute of Technology, China<br/>
+		2013-Present Teacher’s college, Columbia University, Major in Communication and Education
+	</p>
+	
+	<h5><i>Related Working Experiences</i></h5>
+	<p>
+		2009-2012 Online Photography Studio<br/>
+		2013.9-Present Photographer Assistant in Lyn Hughes Photography Studio, NYC
+	</p>
+	<h4>Contact</h4>
+	<p>
+		<%= image_tag 'mail-light.png', :class=>'contact-icon' %> <%=link_to 'zouqian1229@163.com', 'mailto:zouqian1229@163.com', :class=>'contact-link'%><br/>
+		<%= image_tag 'facebook-light.png', :class=>'contact-icon' %> <%=link_to 'qian.zou.7946', 'https://www.facebook.com/qian.zou.7946', :class=>'contact-link' %><br/>
+		<%= image_tag 'instagram-light.png', :class=>'contact-icon' %> <%=link_to 'sisi_monkey', 'http://instagram.com/sisi_monkey', :class=>'contact-link' %>
+	<p>
+
+</div>
