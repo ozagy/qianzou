@@ -171,6 +171,10 @@
   </style>
 <% end %>
 
+<% content_for :meta %>
+<meta property='og:image' content='http://photography.sisizou.com/assets/about-br.jpg'>
+<% end %>
+
 <div id='category-div'>
 	<ul id='category-nav'>
 	  <li><b>Albums: </b></li><li id='album-all' class='filter <%= 'selected' if @a_init.nil? %>' album='*' a_name='All'>All</li>
