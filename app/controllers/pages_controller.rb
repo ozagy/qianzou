@@ -10,7 +10,10 @@ class PagesController < ApplicationController
     @albums = Album.all
     @photos = Photo.all
     @a_init = params[:a_name] if params[:a_name]
-    @p_init = params[:p_name] if params[:p_name]
+    if params[:p_name]
+      @p_init = params[:p_name] 
+      @photo_init = Photo.find params[:p_name].to_i
+    end
   end
   
   def contacts

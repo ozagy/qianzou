@@ -172,7 +172,12 @@
 <% end %>
 
 <% content_for :meta do %>
-<meta property='og:image' content='http://photography.sisizou.com/assets/about-br.jpg'>
+  <meta property='og:image' content='
+	<% if @photo_init %>
+	  <%=request.protocol%><%=request.host_with_port%><%=@photo_init.image.url(:thumb)%>
+	<% else %>
+	  http://photography.sisizou.com/assets/thumb.jpg
+	<% end %>'>
 <% end %>
 
 <div id='category-div'>
@@ -185,7 +190,7 @@
 </div>
 <div id="container" class="photos clearfix">
   <% @photos.each do |p| %>
-	<div id='photo-<%= p.id %>' class="photo album-<%= p.album_id %> <%= 'clicked' if @p_init == p.id.to_s %> shadow trans" album='.album-<%= p.album_id %>' p_url='<%=p.image.url(:large)%>' p_width='<%= p.dimensions[0] if p.dimensions %>' p_height='<%= p.dimensions[1] if p.dimensions %>' p_id='<%=p.id%>' p_name='<%=p.name%>'>
+	<div id='photo-<%= p.id %>' class="photo album-<%= p.album_id %> <%= 'clicked' if @p_init == p.id.to_s %> shadow trans" album='.album-<%= p.album_id %>' p_url='<%=p.image.url(:large)%>' p_url_thumb='<%=request.protocol%><%=request.host_with_port%><%=p.image.url(:thumb)%>' p_url_full='<%=request.protocol%><%=request.host_with_port%><%=p.image.url%>' p_width='<%= p.dimensions[0] if p.dimensions %>' p_height='<%= p.dimensions[1] if p.dimensions %>' p_id='<%=p.id%>' p_name='<%=p.name%>'>
 	  <%= image_tag p.image.url(:medium), :class=>'image'%>
 	  <div class='p-name-div trans'>
 	  	<b class='p-name'><%= p.name %></b>
@@ -372,6 +377,7 @@ function changePhoto($ele)
 	url = window.location.href;
 	url_a = url.split('/');
 	url_a = url_a.slice(0,4);
+	$('meta[property="og:image"]').attr('content',$ele.attr('p_url_thumb'));
 	$('.fb-like').attr('data-href', url_a.join('/')+'/photo/'+$ele.attr('p_id') );
 	if (typeof(FB) != 'undefined' && FB != null) 
 		FB.XFBML.parse();
