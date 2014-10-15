@@ -17,6 +17,10 @@ p{
 .footer-text{
 	padding:25px 0 0 5px;
 }
+.footer-text-small{
+	font-size: 12px;
+	padding:25px 0 0 5px;
+}
 #wrapper-right{
 	background:url(./subtle-pattern-7.jpg);
 }
@@ -32,6 +36,15 @@ p{
 .h-wrap{
 	width:960px;
 	margin:0px auto;
+}
+.l-wrap{
+	width:480px;
+	float:left;
+}
+.r-wrap{
+	text-align: right;
+	width:480px;
+	float:left;
 }
 #main{
 	padding-bottom:70px;
@@ -112,6 +125,9 @@ p{
 	text-align:right;
 	opacity:0.3;
 	text-decoration:none;
+}
+#author:hover{
+	color:#888888;
 }
 
 /* button */
